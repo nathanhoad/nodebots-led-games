@@ -45,6 +45,7 @@ Game.prototype.restart = function () {
   
   // Stop all of the LEDs
   for (var i = 0; i < game.leds.length; i++) {
+    game.leds[i].off();
     game.leds[i].stop();
   }
   
@@ -98,10 +99,21 @@ Game.prototype.gameOver = function () {
 Game.prototype.checkDeflection = function (player) {
   var game = this;
   
-  if (player == 1 && game.position == game.POSITION_PLAYER_1) {
-    game.inDanger = false;
-  } else if (player == 2 && game.position == game.POSITION_PLAYER_2) {
-    game.inDanger = false;
+  if (game.inDanger) {
+    if (player == 1 && game.position == game.POSITION_PLAYER_1) {
+      game.inDanger = false;
+    } else if (player == 2 && game.position == game.POSITION_PLAYER_2) {
+      game.inDanger = false;
+    }
+  } else {
+    // Stop players from pressing early
+    if (player == 1) {
+      game.position = game.POSITION_PLAYER_1;
+      game.gameOver();
+    } else if (player = 2) {
+      game.position = game.POSITION_PLAYER_2;
+      game.gameOver();
+    }
   }
 }
 

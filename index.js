@@ -1,5 +1,6 @@
 var j5 = require('johnny-five'),
-    Game = require('./src/tug-of-war');
+    // Game = require('./src/tug-of-war');
+    Game = require('./src/hot-potato');
 
 var board,
     game,
@@ -10,11 +11,5 @@ var board,
 board = new j5.Board();
 
 board.on('ready', function () {
-  console.log('Ready...');
-  
   game = new Game();
-  
-  this.repl.inject({
-    game: game
-  });
 });

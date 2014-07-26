@@ -38,11 +38,20 @@ Game.prototype.restart = function () {
   var game = this;
   
   game.position = game.POSITION_NEUTRAL;
-  game.over = false;
+  game.over = true;
   
+  // Stop all of the LEDs
   for (var i = 0; i < game.leds.length; i++) {
     game.leds[i].stop();
   }
+  
+  // Flash the starter light 3 times before restarting
+  game.leds[game.POSITION_NEUTRAL].strobe(2000 / 4);
+  setTimeout(function() {
+    game.over = false;
+    game.leds[game.POSITION_NEUTRAL].stop();
+    game.update();
+  }, 2000);
   
   game.update();
 }
@@ -82,7 +91,7 @@ Game.prototype.moveTowardsPlayer = function (player) {
 Game.prototype.update = function () {
   var game = this;
   
-  // Show position
+  // Show position on the LEDs
   for (var i = 0; i < game.leds.length; i++) {
     if (i == game.position) {
       game.leds[i].on();

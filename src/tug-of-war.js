@@ -53,7 +53,6 @@ Game.prototype.gameOver = function () {
   
   game.over = true;
   game.leds[game.position].strobe(200);
-  game.leds[game.POSITION_NEUTRAL].on();
   
   setTimeout(function () {
     game.restart();

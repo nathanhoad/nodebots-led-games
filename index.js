@@ -1,5 +1,5 @@
 var j5 = require('johnny-five'),
-    Game = require('./src/game');
+    Game = require('./src/tug-of-war');
 
 var board,
     game,
